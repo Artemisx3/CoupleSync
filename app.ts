@@ -1,5 +1,5 @@
 import * as readline from 'readline';
-import colors from 'colors/safe';
+import * as colors from 'colors/safe';
 import calculateTimeLeft from './countdown';
 import * as fs from 'fs'
 import * as path from 'path'
@@ -15,7 +15,6 @@ let END_DATE_STR : string;
 
 const saveDatesToFile = (targetDate: string, endDate: string) => {
 const data = JSON.stringify({targetDate, endDate});
-console.log('saving data to ', data)
 try {
     fs.writeFileSync(path.join(__dirname, 'dates.json'),data )
 }
@@ -51,7 +50,7 @@ const showMenu = () => {
 
 const startCredits = () => {
     console.clear();
-    console.log("Made with ❤️ " + " by Hana for Mia :3");
+    console.log("Made with ❤️ " + " by Hana & Mia for eachother :3");
     console.log('');
 
     rl.question('1. Go back: ', (answer) => {
@@ -72,19 +71,26 @@ const startCreditsWithPromise = () => {
     });
 };
 const AddDate = () => {
+    console.log('Leave fields empty to return to menu')
     rl.question('Enter the target date (DD/MM/YYYY-HH:MM): ', (targetDate) => {
         rl.question('Enter the end date (DD/MM/YYYY-HH:MM): ', (endDate) => {
-        if (validateDate(targetDate) && validateDate(endDate)) {
+            if (validateDate(targetDate) && validateDate(endDate)) {
             TARGET_DATE_STR = targetDate;
             END_DATE_STR = endDate;
             saveDatesToFile(targetDate, endDate); 
             console.log(colors.green(`Dates set succesfully: ${targetDate} , ${endDate}`));
             main();
             rl.question('Select an option: ', handleMenuChoice);
-        } else {
+            }
+            else if(targetDate === '' && endDate === ''){
+            console.clear();
+            main();
+            }
+            else {
             console.log(colors.red('Invalid date and time format. Please try again.'));
             AddDate();
         }
+
     
     });
 });
