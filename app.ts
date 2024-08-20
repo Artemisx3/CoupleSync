@@ -139,6 +139,7 @@ const handleMenuChoice = async (choice: string) => {
             return; // Exit the function to avoid calling showMenu after closing
         default:
             console.log(colors.yellow('Invalid choice. Please select a valid option.'));
+            console.clear();
             main();
             break;
         
