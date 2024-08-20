@@ -1,5 +1,5 @@
 import * as readline from 'readline';
-import * as colors from 'colors/safe';
+import colors from 'colors/safe';
 import calculateTimeLeft from './countdown';
 import * as fs from 'fs'
 import * as path from 'path'
@@ -10,8 +10,8 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-let TARGET_DATE_STR
-let END_DATE_STR; 
+let TARGET_DATE_STR: string;
+let END_DATE_STR : string; 
 
 const saveDatesToFile = (targetDate: string, endDate: string) => {
 const data = JSON.stringify({targetDate, endDate});
@@ -139,6 +139,7 @@ const handleMenuChoice = async (choice: string) => {
             return; // Exit the function to avoid calling showMenu after closing
         default:
             console.log(colors.yellow('Invalid choice. Please select a valid option.'));
+            main();
             break;
         
     
@@ -152,7 +153,7 @@ const startCountdown = () => {
             console.clear(); // Clear the console to update the display
             console.log(colors.magenta(`Time till we meet each other: ${timeLeft}`));
         } catch (error) {
-            console.error(colors.red('An error occurred while calculating the countdown.'));
+            console.error(colors.red("An error occurred while calculating the countdown or you don't have a time set."));
             clearInterval(intervalId);
         }
     }, 1000);
