@@ -7,7 +7,7 @@ const apiKey = process.env.WEATHER_API_KEY;
 
 async function connectToApiAndPrint() {
     const cities = ['Sofia', 'Gouda'];
-    const weatherData = [];
+    const weatherData :any = [] ;
 
     for (const city of cities) {
         try {
@@ -38,7 +38,7 @@ async function connectToApiAndPrint() {
     }
 }
 
-export function weather() {
+export async function weather():Promise<void> {
     connectToApiAndPrint()
     ;
 }

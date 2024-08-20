@@ -90,18 +90,18 @@ const AddDate = () => {
 });
 }
 
-const ShowingTheWeather = () => {
+const ShowingTheWeather = async () => {
     console.clear();
-    weather();
-    const stopWeather = () => {
-        console.clear
-        showMenu();
-        rl.question('Select an option: ', handleMenuChoice);
-    };
-
-    // Listen for input to stop countdown
-    rl.once('line', stopWeather)
+    await weather(); // Ensure weather data is fully printed
+    setTimeout(() => {
+        console.log(colors.yellow("\nPress Enter to go back..."));
+        rl.once('line', () => {
+            console.clear();
+            main();
+        });
+    }, 300); // Adjust the delay if necessary
 }
+
 
 const validateDate = (dateStr: string): boolean => {
 const dateRegex = /^\d{2}\/\d{2}\/\d{4}-\d{2}:\d{2}$/;
