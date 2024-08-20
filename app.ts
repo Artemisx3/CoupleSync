@@ -99,14 +99,15 @@ const AddDate = () => {
 const ShowingTheWeather = async () => {
     console.clear();
     await weather(); // Ensure weather data is fully printed
-    setTimeout(() => {
-        console.log(colors.yellow("\nPress Enter to go back..."));
-        rl.once('line', () => {
-            console.clear();
-            main();
-        });
-    }, 300); // Adjust the delay if necessary
+    console.log(colors.yellow("\nPress Enter to go back..."));
+
+    rl.once('line', () => {
+        console.clear();
+        main();  // Ensure this calls the main menu function
+    });
 }
+
+
 
 
 const validateDate = (dateStr: string): boolean => {
@@ -176,7 +177,7 @@ const startCountdown = () => {
     rl.once('line', stopCountdown);
 };
 
-const main = () => {
+export const main = () => {
         showMenu();
         rl.question('Select an option: ', handleMenuChoice);
     };

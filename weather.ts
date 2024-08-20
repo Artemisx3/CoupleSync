@@ -1,38 +1,42 @@
 import * as dotenv from 'dotenv';
 import axios from 'axios';
-const colors = require("colors/safe") // Use colors/safe for safer color handling
+import colors from 'colors/safe';
 import * as fs from 'fs';
 import * as readline from 'readline';
-
+import {main} from './app'
 dotenv.config();
 
 const apiKey = process.env.WEATHER_API_KEY;
 const citiesFile = 'cities.json';
 
-// Function to ask for city names
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
 function askForCities(): Promise<string[]> {
     return new Promise((resolve) => {
-        const rl = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout
-        });
+        const cities: string[] = [];
 
         rl.question('Enter the name of the first city: ', (city1) => {
+            const city1Trimmed = city1.trim();
+            cities.push(city1Trimmed);
+     
             rl.question('Enter the name of the second city: ', (city2) => {
-                rl.close();
-                resolve([city1, city2]);
+                const city2Trimmed = city2.trim();
+                cities.push(city2Trimmed);
+                resolve(cities);
             });
         });
     });
 }
 
-// Function to load cities from a JSON file
+
 function loadCities(): Promise<string[]> {
     return new Promise((resolve, reject) => {
         fs.readFile(citiesFile, 'utf8', (err, data) => {
             if (err) {
                 if (err.code === 'ENOENT') {
-                    // File does not exist
                     resolve([]);
                 } else {
                     reject(err);
@@ -49,7 +53,6 @@ function loadCities(): Promise<string[]> {
     });
 }
 
-// Function to save cities to a JSON file
 function saveCities(cities: string[]): Promise<void> {
     return new Promise((resolve, reject) => {
         fs.writeFile(citiesFile, JSON.stringify(cities, null, 2), (err) => {
@@ -72,24 +75,22 @@ async function connectToApiAndPrint(cities: string[]) {
                 location: `${response.data.location.country}, ${response.data.location.name}`,
                 lastUpdated: response.data.current.last_updated,
                 weather: response.data.current.condition.text,
-                temperature: response.data.current.temp_c, // Store as number
+                temperature: response.data.current.temp_c,
                 humidity: `${response.data.current.humidity}%`
             });
         } catch (err) {
-            console.error(`Error connecting to API for ${city}`, err);
+            console.error(`Error connecting to API for ${city}. Did you put your API key in .env?`);
         }
     }
-    //I love Hana so so so much
-    // Print the weather data side by side
+
     for (let i = 0; i < weatherData.length; i++) {
         const data = weatherData[i];
         let tempColor: (text: string) => string;
         let emoji: string;
 
-        // Determine color based on temperature
         if (data.temperature <= 0) {
             tempColor = colors.blue;
-            emoji = '❄️ '; 
+            emoji = '❄️ ';
         } else if (data.temperature <= 10) {
             tempColor = colors.cyan;
             emoji = '🌬️ ';
@@ -101,17 +102,15 @@ async function connectToApiAndPrint(cities: string[]) {
             emoji = '☀️ ';
         } else if (data.temperature <= 40) {
             tempColor = colors.red;
-            emoji = '🔥 '; 
+            emoji = '🔥 ';
         } else if (data.temperature <= 50) {
             tempColor = colors.bgRed;
-            emoji = '🌡️ '; 
-
+            emoji = '🌡️ ';
         } else {
-            tempColor = colors.white; // Default color for very high temperatures
-            emoji = "❓❓ "
+            tempColor = colors.white;
+            emoji = "❓❓ ";
         }
 
-        // Print data with colored temperature
         console.log(`${data.location}`);
         console.log(`Last Updated At: ${data.lastUpdated}`);
         console.log(`Weather: ${data.weather}`);
@@ -126,14 +125,22 @@ async function connectToApiAndPrint(cities: string[]) {
 export async function weather(): Promise<void> {
     try {
         let cities = await loadCities();
-        
+
         if (cities.length === 0) {
             cities = await askForCities();
             await saveCities(cities);
         }
-        
+
         await connectToApiAndPrint(cities);
     } catch (err) {
         console.error('An error occurred:', err);
     }
+}
+
+export const ShowingTheWeather = async () => {
+    console.clear();
+    await weather();
+    // console.log(colors.yellow("\nPress Enter to go back..."));
+        console.clear();
+        main(); // Ensure this calls the main menu function
 }
