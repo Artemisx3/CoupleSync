@@ -1,4 +1,4 @@
 @echo off
-title MeetUP Tracker
+title CoupleSync
 powershell -ExecutionPolicy Bypass -Command "npx ts-node app.ts"
 pausenpx ts-node app.ts
