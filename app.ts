@@ -1,5 +1,5 @@
 import * as readline from 'readline';
-import * as colors from 'colors/safe';
+import colors from 'colors/safe';
 import calculateTimeLeft from './countdown';
 import * as fs from 'fs'
 import * as path from 'path'

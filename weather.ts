@@ -1,13 +1,68 @@
 import * as dotenv from 'dotenv';
 import axios from 'axios';
-import * as colors from 'colors';
+const colors = require("colors/safe") // Use colors/safe for safer color handling
+import * as fs from 'fs';
+import * as readline from 'readline';
 
 dotenv.config();
 
 const apiKey = process.env.WEATHER_API_KEY;
+const citiesFile = 'cities.json';
 
-async function connectToApiAndPrint() {
-    const cities = ['Sofia', 'Gouda'];
+// Function to ask for city names
+function askForCities(): Promise<string[]> {
+    return new Promise((resolve) => {
+        const rl = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout
+        });
+
+        rl.question('Enter the name of the first city: ', (city1) => {
+            rl.question('Enter the name of the second city: ', (city2) => {
+                rl.close();
+                resolve([city1, city2]);
+            });
+        });
+    });
+}
+
+// Function to load cities from a JSON file
+function loadCities(): Promise<string[]> {
+    return new Promise((resolve, reject) => {
+        fs.readFile(citiesFile, 'utf8', (err, data) => {
+            if (err) {
+                if (err.code === 'ENOENT') {
+                    // File does not exist
+                    resolve([]);
+                } else {
+                    reject(err);
+                }
+            } else {
+                try {
+                    const cities = JSON.parse(data);
+                    resolve(cities);
+                } catch (parseErr) {
+                    reject(parseErr);
+                }
+            }
+        });
+    });
+}
+
+// Function to save cities to a JSON file
+function saveCities(cities: string[]): Promise<void> {
+    return new Promise((resolve, reject) => {
+        fs.writeFile(citiesFile, JSON.stringify(cities, null, 2), (err) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve();
+            }
+        });
+    });
+}
+
+async function connectToApiAndPrint(cities: string[]) {
     const weatherData: any[] = [];
 
     for (const city of cities) {
@@ -24,7 +79,6 @@ async function connectToApiAndPrint() {
             console.error(`Error connecting to API for ${city}`, err);
         }
     }
-
     //I love Hana so so so much
     // Print the weather data side by side
     for (let i = 0; i < weatherData.length; i++) {
@@ -70,5 +124,16 @@ async function connectToApiAndPrint() {
 }
 
 export async function weather(): Promise<void> {
-    await connectToApiAndPrint();
+    try {
+        let cities = await loadCities();
+        
+        if (cities.length === 0) {
+            cities = await askForCities();
+            await saveCities(cities);
+        }
+        
+        await connectToApiAndPrint(cities);
+    } catch (err) {
+        console.error('An error occurred:', err);
+    }
 }
