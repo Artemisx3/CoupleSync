@@ -47,3 +47,8 @@
 ```bash 
 npx ts-node app.ts
 ```
+or 
+run our script by double clicking on:
+```batch
+CoupleSync.bat
+```
