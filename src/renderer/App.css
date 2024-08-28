@@ -89,3 +89,16 @@ label {
   background: rgba(255, 255, 255, 0.4); /* Highlight background on hover */
   transform: scale(1.05); /* Slight scale effect on hover */
 }
+
+.countdown {
+  display: inline-block;
+  padding: 12px 24px; /* Padding inside the button */
+  border-radius: 8px; /* Rounded corners */
+  background: rgba(255, 255, 255, 0.2); /* Slightly opaque background */
+  color: #ffffff; /* Text color */
+  font-size: 1.25rem; /* Font size */
+  text-align: center;
+  text-decoration: none; /* Remove underline */
+  transition: background 0.3s, transform 0.3s; /* Smooth transition effects */
+  border: none; /* Remove default border */
+}

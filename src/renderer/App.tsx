@@ -1,6 +1,8 @@
 import { MemoryRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
-import Countdown from './countdown'; // Adjust the import path if necessary
+import Countdown from './web/countdown'; // Adjust the import path if necessary
+import './renderer';
+import Credits from './web/view-credits';
 
 function Hello() {
   return (
@@ -30,6 +32,9 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Hello />} />
         <Route path="/show-time" element={<Countdown />} />
+        <Route path="/check-weather" element={<Countdown />} />
+        <Route path="/set-dates" element={<Countdown />} />
+        <Route path="/view-credits" element={<Credits />} />
         {/* Add routes for other components as needed */}
       </Routes>
     </Router>

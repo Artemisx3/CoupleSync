@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // Import Link correctly
-import { parseDate } from '../../utils/parseDate'; // Ensure this path is correct
+import { parseDate } from '../../../utils/parseDate'; // Ensure this path is correct
 
 // Define your human-readable date strings
 const TARGET_DATE_STR = '13/09/2024-22:10'; // Change this to your desired date
