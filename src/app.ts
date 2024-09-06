@@ -5,7 +5,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import { weather } from "./weather"
 
-const rl = readline.createInterface({
+export const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
@@ -80,7 +80,6 @@ const AddDate = () => {
             saveDatesToFile(targetDate, endDate); 
             console.log(colors.green(`Dates set succesfully: ${targetDate} , ${endDate}`));
             main();
-            rl.question('Select an option: ', handleMenuChoice);
             }
             else if(targetDate === '' && endDate === ''){
             console.clear();

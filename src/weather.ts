@@ -3,16 +3,11 @@ import axios from 'axios';
 import colors from 'colors/safe';
 import * as fs from 'fs';
 import * as readline from 'readline';
-import {main} from './app'
+import {main, rl} from './app'
 dotenv.config();
 
 const apiKey = process.env.WEATHER_API_KEY;
 const citiesFile = 'cities.json';
-
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
 
 function askForCities(): Promise<string[]> {
     return new Promise((resolve) => {
@@ -34,6 +29,7 @@ function askForCities(): Promise<string[]> {
 
 function loadCities(): Promise<string[]> {
     return new Promise((resolve, reject) => {
+      
         fs.readFile(citiesFile, 'utf8', (err, data) => {
             if (err) {
                 if (err.code === 'ENOENT') {
@@ -52,6 +48,8 @@ function loadCities(): Promise<string[]> {
         });
     });
 }
+
+
 
 function saveCities(cities: string[]): Promise<void> {
     return new Promise((resolve, reject) => {
@@ -126,7 +124,10 @@ export async function weather(): Promise<void> {
     try {
         let cities = await loadCities();
 
-        if (cities.length === 0) {
+        if(cities.length > 1){
+            await connectToApiAndPrint(cities);
+        }
+        else if (cities.length === 0) {
             cities = await askForCities();
             await saveCities(cities);
         }

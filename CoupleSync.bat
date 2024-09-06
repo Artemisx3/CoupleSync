@@ -4,7 +4,7 @@ title CoupleSync
 :: Check if 'node_modules' directory exists to determine if dependencies are installed
 if not exist "node_modules" (
     echo Dependencies not found. Installing...
-    npm install
+    pnpm install
 )
 
 :: Start the program using PowerShell with the specified command
