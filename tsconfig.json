@@ -1,18 +1,29 @@
 {
   "compilerOptions": {
-    "incremental": true,
-    "target": "es2022",
-    "module": "commonjs",
-    "lib": ["dom", "es2022"],
-    "jsx": "react-jsx",
-    "strict": true,
-    "sourceMap": true,
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
-    "allowJs": true,
-    "outDir": ".erb/dll"
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "types": ["node", "@tauri-apps/api"],
+    "paths": {
+      "@tauri-apps/api": ["./node_modules/@tauri-apps/api"],
+      "@tauri-apps/api/*": ["./node_modules/@tauri-apps/api/*"]
+    }
   },
-  "exclude": ["test", "release/build", "release/app/dist", ".erb/dll"]
+  "include": ["src"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
