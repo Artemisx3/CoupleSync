@@ -1,4 +1,4 @@
-# CoupleSync Electron App
+# CoupleSync Tauri App
 
 ## Overview
 
