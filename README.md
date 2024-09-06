@@ -8,8 +8,7 @@ CoupleSync is an Electron application designed to [brief description of what the
 
 Before running the app, ensure you have the following installed:
 
-- [Node.js](https://nodejs.org/) (>= 14.x)
-- [npm](https://www.npmjs.com/)
+- [pnpm](https://pnpm.io/)
 
 ## Installation
 
@@ -29,14 +28,14 @@ Before running the app, ensure you have the following installed:
 3. **Install dependencies:**
 
    ```bash
-   npm install
+   pnpm install
    ```
 ## Running the App
 
 To start the Electron app in development mode, run:
 
 ```bash
-npm start
+pnpm start
 ```
 This will open the Electron application and allow you to see changes as you develop.
 
@@ -45,7 +44,7 @@ This will open the Electron application and allow you to see changes as you deve
 To build the app for distribution, run:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 This will create a distributable package of the app in the `dist` directory.
@@ -53,7 +52,7 @@ This will create a distributable package of the app in the `dist` directory.
 ## Development
 
 - **Code Style:** Follow the project's code style guidelines.
-- **Linting:** Use ESLint for linting. Run `npm run lint` or `yarn lint` to check for issues.
+- **Linting:** Use ESLint for linting. Run `pnpm run lint` or `yarn lint` to check for issues.
 - **Testing:** [Describe any testing framework or methodology used, if applicable.]
 
 ## Contributing
