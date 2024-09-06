@@ -1,4 +1,4 @@
-import { parseDate } from './parseDate';
+import { parseDate } from './util/parseDate';
 
 interface TimeLeft {
   seconds: number;

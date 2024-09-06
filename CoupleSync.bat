@@ -8,6 +8,6 @@ if not exist "node_modules" (
 )
 
 :: Start the program using PowerShell with the specified command
-powershell -ExecutionPolicy Bypass -Command "npx ts-node app.ts"
+powershell -ExecutionPolicy Bypass -Command "npx ts-node ./src/app.ts"
 
 pause
