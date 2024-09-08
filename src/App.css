@@ -22,16 +22,16 @@ a, a:visited, a:hover, a:focus, a:active {
 
 .container {
   width: 90%;
-  max-width: 800px; /* More compact width */
-  border-radius: 16px; /* Rounded corners */
-  padding: 30px; /* Generous padding inside the container */
+  max-width: 50rem; /* More compact width */
+  border-radius: 1rem; /* Rounded corners */
+  padding: 2rem; /* Generous padding inside the container */
   background: rgba(0, 0, 0, 0.6); /* Semi-transparent background for contrast */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
 .Hello {
   font-size: 2.5rem; /* Slightly smaller font size for balance */
-  margin-bottom: 30px; /* Increased spacing below the title */
+  margin-bottom: 2rem; /* Increased spacing below the title */
   color: #ffffff; /* Dark text for contrast */
   text-align: center;
 }
@@ -39,13 +39,13 @@ a, a:visited, a:hover, a:focus, a:active {
 .list {
   display: flex;
   flex-direction: column; /* Stack items vertically */
-  gap: 15px; /* Space between items */
+  gap: 1rem; /* Space between items */
 }
 
 .list a {
   display: block;
-  padding: 15px; /* Padding inside each link */
-  border-radius: 8px; /* Rounded corners */
+  padding: 1rem; /* Padding inside each link */
+  border-radius: 0.5rem; /* Rounded corners */
   background: rgba(255, 255, 255, 0.2); /* Slightly opaque background */
   color: #ffffff; /* Ensure text color is readable */
   font-size: 1.25rem;
@@ -59,23 +59,24 @@ a, a:visited, a:hover, a:focus, a:active {
 }
 
 input[type="date"] {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  padding: 0.625rem;
+  border-radius: 0.5rem;
+  border: 0.0625rem solid #ccc;
   font-size: 1rem;
   width: 100%;
 }
 
 label {
   font-size: 1.1rem;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
   display: block;
   color: #ffffff; /* Dark text for labels */
 }
-.go-back-button {
+
+.go-back-button, .go-back-link, .weather-check button {
   display: inline-block;
-  padding: 12px 24px; /* Padding inside the button */
-  border-radius: 8px; /* Rounded corners */
+  padding: 0.75rem 1.5rem; /* Padding inside the button */
+  border-radius: 0.5rem; /* Rounded corners */
   background: rgba(255, 255, 255, 0.2); /* Slightly opaque background */
   color: #ffffff; /* Text color */
   font-size: 1.25rem; /* Font size */
@@ -85,15 +86,15 @@ label {
   border: none; /* Remove default border */
 }
 
-.go-back-button:hover {
+.go-back-button:hover, .go-back-link:hover, .weather-check button:hover {
   background: rgba(255, 255, 255, 0.4); /* Highlight background on hover */
   transform: scale(1.05); /* Slight scale effect on hover */
 }
 
 .countdown {
   display: inline-block;
-  padding: 12px 24px; /* Padding inside the button */
-  border-radius: 8px; /* Rounded corners */
+  padding: 0.75rem 1.5rem; /* Padding inside the button */
+  border-radius: 0.5rem; /* Rounded corners */
   background: rgba(255, 255, 255, 0.2); /* Slightly opaque background */
   color: #ffffff; /* Text color */
   font-size: 1.25rem; /* Font size */
@@ -106,29 +107,68 @@ label {
 /* Add these styles to your existing App.css */
 
 .weather-check {
-  max-width: 90%;
-  width: 400px;
+  max-width: 37.5rem;
   margin: 0 auto;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1.25rem;
+  width: 100%; /* Ensure it scales to fit the screen */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.city-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.weather-controls {
+  margin-bottom: 1.25rem;
+}
+
+.weather-card {
+  background-color: #f0f0f0;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.settings {
+  margin-top: 1.25rem;
+  text-align: right;
+}
+
+input, button {
+  margin: 0.3125rem;
+  padding: 0.5rem;
+  width: calc(100% - 1rem); /* Ensure inputs and buttons scale to fit the screen */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+button {
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+}
+
+button:hover {
+  background-color: #45a049;
 }
 
 .weather-check h1 {
   color: #ffffff;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 1rem;
   font-size: 1.5rem;
 }
 
 .weather-check input[type="text"] {
-  width: calc(100% - 20px);
-  padding: 8px 10px;
-  margin-bottom: 10px;
+  width: calc(100% - 1.25rem);
+  padding: 0.5rem 0.625rem;
+  margin-bottom: 0.625rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   background: rgba(255, 255, 255, 0.2);
   color: #ffffff;
   font-size: 0.9rem;
@@ -138,76 +178,39 @@ label {
   color: rgba(255, 255, 255, 0.7);
 }
 
-.weather-check button {
-  display: inline-block;
-  width: auto;
-  padding: 8px 15px;
-  border: none;
-  border-radius: 5px;
-  background: #4a90e2;
-  color: #ffffff;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.1s;
-  font-size: 0.9rem;
-}
-
-.weather-check button:hover {
-  background: #357abd;
-  transform: translateY(-1px);
-}
-
 .weather-check button:active {
-  transform: translateY(1px);
+  transform: translateY(0.0625rem);
 }
 
 .weather-card {
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 15px;
-  backdrop-filter: blur(5px);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  backdrop-filter: blur(0.3125rem);
   color: #ffffff; /* Ensure text is visible on the semi-transparent background */
 }
 
 .weather-card h2 {
   color: #ffffff;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
   font-size: 1.1rem;
 }
 
 .weather-card p {
-  margin-bottom: 4px;
+  margin-bottom: 0.25rem;
   font-size: 0.9rem;
 }
 
-.go-back-button {
-  display: inline-block;
-  width: auto;
-  text-align: center;
-  padding: 8px 15px;
-  background: #6c757d;
-  color: #ffffff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background 0.3s, transform 0.1s;
-  font-size: 0.9rem;
-  margin-top: 10px;
-}
-
-.go-back-button:hover {
-  background: #5a6268;
-  transform: translateY(-1px);
-}
-
-.go-back-button:active {
-  transform: translateY(1px);
+.go-back-link:active {
+  transform: translateY(0.125rem); /* Active effect */
 }
 
 /* Responsive adjustments */
-@media (max-width: 480px) {
+@media (max-width: 30rem) {
   .weather-check {
     width: 95%;
-    padding: 10px;
+    padding: 0.625rem;
   }
 
   .weather-check h1 {
@@ -216,7 +219,7 @@ label {
 
   .weather-check input[type="text"],
   .weather-check button,
-  .go-back-button {
+  .go-back-link {
     font-size: 0.8rem;
   }
 }
@@ -230,47 +233,80 @@ label {
 .temp-extreme { color: #ffffff; }
 
 .api-key-setup {
-  max-width: 400px;
+  max-width: 25rem;
   margin: 0 auto;
-  padding: 20px;
+  padding: 1.25rem;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0.625rem;
+  backdrop-filter: blur(0.625rem);
+  box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
 }
 
 .api-key-setup h2 {
   color: #ffffff;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 0.9375rem;
 }
 
 .api-key-setup p {
   color: #ffffff;
-  margin-bottom: 15px;
+  margin-bottom: 0.9375rem;
 }
 
 .api-key-setup input[type="text"] {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 0.625rem;
+  margin-bottom: 0.625rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   background: rgba(255, 255, 255, 0.2);
   color: #ffffff;
 }
 
 .api-key-setup button {
   width: 100%;
-  padding: 10px;
+  padding: 0.625rem;
   border: none;
-  border-radius: 5px;
-  background: #4a90e2;
+  border-radius: 0.3125rem;
+  background: linear-gradient(
+    135deg,
+    #ff9a8b, /* Soft pink */
+    #ff6a88, /* Slightly darker pink */
+    #d58cfa  /* Light purple */
+  );
   color: #ffffff;
   cursor: pointer;
   transition: background 0.3s;
 }
 
-.api-key-setup button:hover {
-  background: #357abd;
+
+/* Additional responsive adjustments for smaller screens */
+@media (max-width: 800px) {
+  .weather-check {
+    padding: 1rem;
+  }
+
+  .city-inputs input,
+  .city-inputs button,
+  .weather-controls button,
+  .settings button {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+
+  .weather-card {
+    padding: 0.75rem;
+  }
+
+  .weather-card h2 {
+    font-size: 1rem;
+  }
+
+  .weather-card p {
+    font-size: 0.8rem;
+  }
+
+  .go-back-link {
+    width: 87%;
+  }
 }
